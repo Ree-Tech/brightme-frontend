@@ -1,7 +1,7 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/constants/home_fitur_data.dart';
-import 'package:bright_me/widget/new_card.dart';
+import 'package:bright_me/widget/news_card.dart';
 import 'package:bright_me/widget/product_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';

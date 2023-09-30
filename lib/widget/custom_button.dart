@@ -6,10 +6,14 @@ import 'package:bright_me/config/font_theme.dart';
 class CustomButton extends StatelessWidget {
   final String buttonText;
   final void Function() onPressed;
+  final double? heightButton;
+  final double? sizeFont;
   const CustomButton({
     Key? key,
     required this.buttonText,
     required this.onPressed,
+    this.heightButton,
+    this.sizeFont,
   }) : super(key: key);
 
   @override
@@ -20,12 +24,12 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             backgroundColor: purpleColor,
-            fixedSize: const Size(double.infinity, 48),
+            fixedSize: Size(double.infinity, heightButton ?? 48),
             shape: const StadiumBorder()),
         child: Text(
           buttonText,
           style: semiBold(
-            sizeFont: 16,
+            sizeFont: sizeFont ?? 16,
             colorFont: whiteColor,
           ),
         ),

@@ -13,18 +13,33 @@ class _ProductCardState extends State<ProductCard> {
   bool isfavorite = false;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 127,
-          child: Stack(
+    return Container(
+      height: 270,
+      width: 150,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.25),
+            offset: Offset(0, 2),
+            blurRadius: 8,
+            spreadRadius: 0,
+          ),
+        ],
+        color: lightWhite,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Stack(
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24)),
-                child: SizedBox(
-                  width: 150,
+              SizedBox(
+                height: 130,
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(24),
+                      topRight: Radius.circular(24)),
                   child: Image.network(
                     "https://images.unsplash.com/photo-1519669011783-4eaa95fa1b7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1579&q=80",
                     fit: BoxFit.cover,
@@ -50,25 +65,8 @@ class _ProductCardState extends State<ProductCard> {
                   ))
             ],
           ),
-        ),
-        Container(
-          width: 150,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24)),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(0, 2),
-                blurRadius: 8,
-                spreadRadius: 0,
-              ),
-            ],
-            color: lightWhite,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(top: 15, left: 15, bottom: 15),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 3, top: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -138,34 +136,37 @@ class _ProductCardState extends State<ProductCard> {
                             ))
                       ],
                     ),
+                    const SizedBox(
+                      width: 3,
+                    ),
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
                             isfavorite = !isfavorite;
                           });
                         },
-                        style: IconButton.styleFrom(
+                        style: ElevatedButton.styleFrom(
                             backgroundColor: whiteColor,
-                            fixedSize: const Size(16, 16),
+                            fixedSize: const Size(13, 13),
                             shape: const CircleBorder()),
                         child: isfavorite
                             ? const Icon(
                                 Icons.favorite,
                                 color: purpleColor,
-                                size: 16,
+                                size: 13,
                               )
                             : const Icon(
                                 Icons.favorite_outline,
                                 color: purpleColor,
-                                size: 16,
+                                size: 13,
                               ))
                   ],
                 )
               ],
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }

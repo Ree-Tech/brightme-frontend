@@ -1,7 +1,7 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/pages/activity/activity_page.dart';
-import 'package:bright_me/pages/detection/detection_page.dart';
+import 'package:bright_me/pages/detection/detection_popup.dart';
 import 'package:bright_me/pages/homepage/home_page.dart';
 import 'package:bright_me/pages/profile/profile_page.dart';
 import 'package:bright_me/pages/shop/shop_page.dart';
@@ -20,7 +20,7 @@ class _AppPagesState extends State<AppPages> {
   final List<Widget> _pages = const [
     HomePage(),
     ActivityPage(),
-    DectionPage(),
+    HomePage(),
     ShopPage(),
     ProfilePage(),
   ];
@@ -102,13 +102,8 @@ class _AppPagesState extends State<AppPages> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: purpleColor,
-        onPressed: () {
-          // Handle FAB button click here
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const DectionPage(),
-            ),
-          );
+        onPressed: () async {
+          await dialogPopUP(context);
         },
         child: Image.asset("assets/images/face.jpg"),
       ),

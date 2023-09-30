@@ -4,3 +4,6 @@ const String registerRoute = "/register";
 const String surveyRoute = "/survey";
 const String otpRoute = "/otp";
 const String appRoute = "/appscreen";
+const String cameraPage = "/camerapage";
+const String processResultPage = "/pageResult";
+const String recommendedProduct = "/recomendationProduct";
