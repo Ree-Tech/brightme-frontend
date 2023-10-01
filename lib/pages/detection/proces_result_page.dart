@@ -19,7 +19,7 @@ class _ProcessResultPageState extends State<ProcessResultPage> {
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(seconds: 3), () async {
+    Future.delayed(const Duration(seconds: 3), () async {
       setState(() {
         isLoading = false;
       });

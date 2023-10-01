@@ -18,14 +18,7 @@ class _ProductCardState extends State<ProductCard> {
       width: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.25),
-            offset: Offset(0, 2),
-            blurRadius: 8,
-            spreadRadius: 0,
-          ),
-        ],
+        boxShadow: boxShadow,
         color: lightWhite,
       ),
       child: Column(

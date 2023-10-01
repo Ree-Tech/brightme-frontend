@@ -35,16 +35,7 @@ class _AppPagesState extends State<AppPages> {
           topRight: Radius.circular(34.0),
         ),
         child: Container(
-          decoration: const BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(0, 2),
-                blurRadius: 8,
-                spreadRadius: 0,
-              ),
-            ],
-          ),
+          decoration: BoxDecoration(boxShadow: boxShadow),
           child: BottomNavigationBar(
             elevation: 3,
             backgroundColor: lightWhite,

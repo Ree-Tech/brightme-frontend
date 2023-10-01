@@ -31,18 +31,11 @@ class _RowProductCardState extends State<RowProductCard> {
         Container(
           width: 150,
           height: 170,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(24),
                 bottomRight: Radius.circular(24)),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(0, 2),
-                blurRadius: 8,
-                spreadRadius: 0,
-              ),
-            ],
+            boxShadow: boxShadow,
             color: lightWhite,
           ),
           child: Padding(

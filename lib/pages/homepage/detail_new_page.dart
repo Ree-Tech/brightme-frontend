@@ -18,17 +18,9 @@ class DetailNewsPage extends StatelessWidget {
                 height: 400,
                 width: 315,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  color: lightWhite,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      offset: Offset(0, 2),
-                      blurRadius: 8,
-                      spreadRadius: 0,
-                    ),
-                  ],
-                ),
+                    borderRadius: BorderRadius.circular(24),
+                    color: lightWhite,
+                    boxShadow: boxShadow),
                 child: Column(
                   children: [
                     Stack(
