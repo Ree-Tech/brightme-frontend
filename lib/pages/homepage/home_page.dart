@@ -1,5 +1,6 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
+import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/constants/home_fitur_data.dart';
 import 'package:bright_me/widget/news_card.dart';
 import 'package:bright_me/widget/product_card.dart';
@@ -86,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       ElevatedButton(
                           onPressed: () {},
-                          style: IconButton.styleFrom(
+                          style: ElevatedButton.styleFrom(
                               backgroundColor: whiteColor,
                               fixedSize: const Size(32, 32),
                               shape: const CircleBorder()),
@@ -217,7 +218,10 @@ class _HomePageState extends State<HomePage> {
                       itemCount: 3,
                       itemBuilder: (BuildContext context, int itemIndex,
                               int pageViewIndex) =>
-                          Image.asset("assets/images/slider.jpg")),
+                          GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, spesialProductRoute),
+                              child: Image.asset("assets/images/slider.jpg"))),
                 ),
                 DotsIndicator(
                   dotsCount: 3,
@@ -265,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Popular products',
+                      'About local & halal products',
                       style: semiBold(
                         sizeFont: 16,
                         colorFont: blackColor,
@@ -298,15 +302,23 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Padding(
                             padding: const EdgeInsets.only(top: 13, bottom: 10),
-                            child: Text(
-                              'View More',
-                              style: medium(
-                                sizeFont: 12,
-                                colorFont: purpleColor,
+                            child: GestureDetector(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, newsRoute),
+                              child: Text(
+                                'View More',
+                                style: medium(
+                                  sizeFont: 12,
+                                  colorFont: purpleColor,
+                                ),
                               ),
                             )),
-                        const NewsCard(),
-                        const NewsCard(),
+                        const NewsCard(
+                          space: 3,
+                        ),
+                        const NewsCard(
+                          space: 3,
+                        ),
                       ],
                     ),
                   ),

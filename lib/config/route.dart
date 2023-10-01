@@ -7,6 +7,9 @@ import 'package:bright_me/pages/detection/camera_page.dart';
 import 'package:bright_me/pages/detection/proces_result_page.dart';
 import 'package:bright_me/pages/detection/recommendation_page.dart';
 import 'package:bright_me/pages/eror_page.dart';
+import 'package:bright_me/pages/homepage/detail_new_page.dart';
+import 'package:bright_me/pages/homepage/news_page.dart';
+import 'package:bright_me/pages/homepage/spesial_product.dart';
 import 'package:bright_me/pages/onboarding/onboarding_page.dart';
 import 'package:bright_me/pages/survey/survey_page.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +29,18 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) => const OtpPage());
       case appRoute:
         return MaterialPageRoute(builder: (_) => const AppPages());
-      case cameraPage:
+      case cameraPageRoute:
         return MaterialPageRoute(builder: (_) => const CameraPage());
-      case processResultPage:
+      case processResultRoute:
         return MaterialPageRoute(builder: (_) => const ProcessResultPage());
       case recommendedProduct:
         return MaterialPageRoute(builder: (_) => const RecommendationPage());
+      case newsRoute:
+        return MaterialPageRoute(builder: (_) => const NewsPage());
+      case detailNewsRoute:
+        return MaterialPageRoute(builder: (_) => const DetailNewsPage());
+      case spesialProductRoute:
+        return MaterialPageRoute(builder: (_) => const SpesialProduct());
 
       default:
         return MaterialPageRoute(
