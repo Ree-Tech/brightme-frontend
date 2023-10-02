@@ -16,6 +16,10 @@ const Color lightWhite = Color(0xffFEFCFF);
 
 const Color yellowColor = Color(0xfffBC028);
 
+const Color blueColor = Color(0xff215AA8);
+
+const Color textGrey = Color(0xff474747);
+
 List<BoxShadow> boxShadow = const [
   BoxShadow(
     color: Color.fromRGBO(0, 0, 0, 0.25),

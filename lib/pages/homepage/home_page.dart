@@ -160,7 +160,8 @@ class _HomePageState extends State<HomePage> {
                     children: homeFiturData
                         .map(
                           (item) => GestureDetector(
-                            onTap: () {}, //todo: tambahkan rute menuju menu
+                            onTap: () =>
+                                Navigator.pushNamed(context, item['route']!),
                             child: Column(
                               children: [
                                 Image.asset(

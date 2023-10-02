@@ -9,6 +9,7 @@ environment:
   sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
+  action_slider: ^0.7.0
   bloc: ^8.1.2
   camera: ^0.10.5+5
   carousel_slider: ^4.2.1

@@ -1,3 +1,4 @@
+import 'package:bright_me/config/route_name.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bright_me/config/font_theme.dart';
@@ -13,29 +14,33 @@ class ErorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Eror Page",
-            style: extraBold(),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Text(
-            "Eror dev: ${textEror ?? " "}",
-            style: medium(),
-          ),
-          const SizedBox(
-            height: 80,
-          ),
-          CustomButton(
-            buttonText: "Kembali",
-            onPressed: () => Navigator.pop(context),
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Eror Page",
+              style: extraBold(),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              "Eror dev: ${textEror ?? " "}",
+              style: medium(),
+            ),
+            const SizedBox(
+              height: 80,
+            ),
+            CustomButton(
+              buttonText: "Kembali",
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, appRoute),
+            )
+          ],
+        ),
       ),
     );
   }

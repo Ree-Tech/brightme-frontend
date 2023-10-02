@@ -7,6 +7,9 @@ import 'package:bright_me/pages/detection/camera_page.dart';
 import 'package:bright_me/pages/detection/proces_result_page.dart';
 import 'package:bright_me/pages/detection/recommendation_page.dart';
 import 'package:bright_me/pages/eror_page.dart';
+import 'package:bright_me/pages/homepage/community/community_page.dart';
+import 'package:bright_me/pages/homepage/community/community_profile_page.dart';
+import 'package:bright_me/pages/homepage/community/join_community.dart';
 import 'package:bright_me/pages/homepage/detail_new_page.dart';
 import 'package:bright_me/pages/homepage/news_page.dart';
 import 'package:bright_me/pages/homepage/spesial_product.dart';
@@ -41,11 +44,17 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) => const DetailNewsPage());
       case spesialProductRoute:
         return MaterialPageRoute(builder: (_) => const SpesialProduct());
+      case communityRoute:
+        return MaterialPageRoute(builder: (_) => const CommunityPage());
+      case joinCommunityRoute:
+        return MaterialPageRoute(builder: (_) => const JoinCommunityPage());
+      case communityProfileRoute:
+        return MaterialPageRoute(builder: (_) => const CommunityProfilePage());
 
       default:
         return MaterialPageRoute(
             builder: (_) => ErorPage(
-                  textEror: settings.arguments as String,
+                  textEror: settings.arguments as String?,
                 ));
     }
   }

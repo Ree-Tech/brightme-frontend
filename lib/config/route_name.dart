@@ -10,3 +10,6 @@ const String recommendedProduct = "/recomendationProduct";
 const String newsRoute = "/newsRoute";
 const String detailNewsRoute = "/detailNews";
 const String spesialProductRoute = "/spesialProduct";
+const String communityRoute = "/comunityPage";
+const String joinCommunityRoute = "/joinComunityPage";
+const String communityProfileRoute = "/communityProfileRoute";

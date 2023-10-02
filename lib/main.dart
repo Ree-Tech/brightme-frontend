@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: whiteColor,
       ),
       onGenerateRoute: RouteGenarator.generateRoute,
-      home: const OnboardingPage(),
+      home: const AppPages(),
     );
   }
 }

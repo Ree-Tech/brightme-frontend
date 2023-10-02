@@ -1,4 +1,6 @@
 //todo: tambahkan route jika sudah wireframe
+import 'package:bright_me/config/route_name.dart';
+
 List<Map<String, String>> homeFiturData = [
   {
     'title': "GlowUp Plan",
@@ -18,6 +20,6 @@ List<Map<String, String>> homeFiturData = [
   {
     'title': "Community",
     'image': "assets/images/icon_komunitas.jpg",
-    'route': "",
+    'route': communityRoute,
   },
 ];
