@@ -34,8 +34,8 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   void initState() {
-    onNewCameraSelected(cameras[0]);
-    Timer(Duration(seconds: 3), () {
+    onNewCameraSelected(cameras[1]);
+    Timer(const Duration(seconds: 3), () {
       setState(() {
         _showContainer = false;
       });
@@ -158,7 +158,7 @@ class _CameraPageState extends State<CameraPage> {
 
   //navigate to result page ML
   handleResultPage() {
-    Navigator.pushReplacementNamed(context, processResultPage);
+    Navigator.pushReplacementNamed(context, processResultRoute);
   }
 
   @override
