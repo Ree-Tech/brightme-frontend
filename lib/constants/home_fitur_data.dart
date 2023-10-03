@@ -5,17 +5,17 @@ List<Map<String, String>> homeFiturData = [
   {
     'title': "GlowUp Plan",
     'image': "assets/images/icon_glowup.jpg",
-    'route': "",
+    'route': glowUpPlanRoute,
   },
   {
     'title': "Consultation",
     'image': "assets/images/icon_konsul.jpg",
-    'route': "",
+    'route': '',
   },
   {
     'title': "GlowUp Edu",
     'image': "assets/images/icon_edu.jpg",
-    'route': "",
+    'route': glowupEduRoute,
   },
   {
     'title': "Community",

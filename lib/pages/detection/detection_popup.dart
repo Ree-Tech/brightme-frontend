@@ -25,7 +25,7 @@ Future dialogPopUP(BuildContext context) async {
                   child: CustomButton(
                     buttonText: "Okay",
                     onPressed: () {
-                      Navigator.pushNamed(context, cameraPage);
+                      Navigator.pushNamed(context, cameraPageRoute);
                     },
                   )),
             ),

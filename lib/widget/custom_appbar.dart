@@ -7,11 +7,13 @@ class CustomAppBar extends StatelessWidget {
   final String titleAppBar;
   final void Function()? onPressedFunc;
   final double? borderRadius;
+  final List<Widget>? actionList;
   const CustomAppBar({
     Key? key,
     required this.titleAppBar,
     this.onPressedFunc,
     this.borderRadius,
+    this.actionList,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class CustomAppBar extends StatelessWidget {
     return SliverAppBar(
       toolbarHeight: 100,
       centerTitle: true,
+      actions: actionList ?? [],
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(

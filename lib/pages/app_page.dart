@@ -96,7 +96,7 @@ class _AppPagesState extends State<AppPages> {
         onPressed: () async {
           await dialogPopUP(context);
         },
-        child: Image.asset("assets/images/face.jpg"),
+        child: Image.asset("assets/images/icon_face.png"),
       ),
     );
   }
