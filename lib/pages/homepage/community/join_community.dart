@@ -75,7 +75,11 @@ class _JoinCommunityPageState extends State<JoinCommunityPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Image.asset("assets/images/user_community.jpg"),
+                          Image.asset(
+                            "assets/images/user_community.jpg",
+                            width: 112,
+                            height: 41,
+                          ),
                           SizedBox(
                             width: 140,
                             child: CustomButton(
@@ -130,6 +134,8 @@ class _JoinCommunityPageState extends State<JoinCommunityPage> {
                               ),
                               Image.asset(
                                 "assets/images/icon_chat.png",
+                                width: 42,
+                                height: 42,
                               )
                             ],
                           ),
