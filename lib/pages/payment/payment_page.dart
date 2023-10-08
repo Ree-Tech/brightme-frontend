@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/config/route_name.dart';
@@ -5,10 +7,13 @@ import 'package:bright_me/constants/payment_data.dart';
 import 'package:bright_me/widget/custom_appbar.dart';
 import 'package:bright_me/widget/custom_button.dart';
 import 'package:bright_me/widget/custom_radio.dart';
-import 'package:flutter/material.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({super.key});
+  final String routeAfterPay;
+  const PaymentPage({
+    Key? key,
+    required this.routeAfterPay,
+  }) : super(key: key);
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -113,8 +118,9 @@ class _PaymentPageState extends State<PaymentPage> {
                     ],
                   )),
                   CustomButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, instructionsPayRoute),
+                    onPressed: () => Navigator.pushNamed(
+                        context, instructionsPayRoute,
+                        arguments: widget.routeAfterPay),
                     buttonText: "Pay",
                   ),
                 ],

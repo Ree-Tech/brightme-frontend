@@ -1,13 +1,17 @@
 import 'dart:async';
 
-import 'package:bright_me/config/color_theme.dart';
-import 'package:bright_me/config/font_theme.dart';
-import 'package:bright_me/config/route_name.dart';
-import 'package:bright_me/constants/instruction_payment_data.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bright_me/config/color_theme.dart';
+import 'package:bright_me/config/font_theme.dart';
+import 'package:bright_me/constants/instruction_payment_data.dart';
+
 class IntructionPaymentPage extends StatefulWidget {
-  const IntructionPaymentPage({super.key});
+  final String routeAfterPay;
+  const IntructionPaymentPage({
+    Key? key,
+    required this.routeAfterPay,
+  }) : super(key: key);
 
   @override
   State<IntructionPaymentPage> createState() => _IntructionPaymentPageState();
@@ -17,7 +21,7 @@ class _IntructionPaymentPageState extends State<IntructionPaymentPage> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushNamed(context, paymentCompleteRoute);
+      Navigator.pushReplacementNamed(context, widget.routeAfterPay);
     });
     super.initState();
   }

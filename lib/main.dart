@@ -1,10 +1,12 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/route.dart';
-import 'package:bright_me/pages/onboarding/onboarding_page.dart';
+import 'package:bright_me/pages/app_page.dart';
 
 import 'package:camera/camera.dart';
 
 import 'package:flutter/material.dart';
+
+import 'pages/homepage/personal_consul/chat_page.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: whiteColor,
       ),
       onGenerateRoute: RouteGenarator.generateRoute,
-      home: const OnboardingPage(),
+      home: AppPages(),
     );
   }
 }

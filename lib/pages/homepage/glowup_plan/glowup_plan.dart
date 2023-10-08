@@ -296,7 +296,11 @@ class GlowUpPlanPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(30),
           child: CustomButton(
-            onPressed: () => Navigator.pushNamed(context, paymentRoute),
+            onPressed: () => Navigator.pushNamed(
+              context,
+              paymentRoute,
+              arguments: glowupPaymentCompleteRoute,
+            ),
             buttonText: "Confirmation",
           ),
         )

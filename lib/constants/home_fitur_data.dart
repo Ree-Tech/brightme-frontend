@@ -10,7 +10,7 @@ List<Map<String, String>> homeFiturData = [
   {
     'title': "Consultation",
     'image': "assets/images/icon_konsul.jpg",
-    'route': '',
+    'route': personalConsulRoute,
   },
   {
     'title': "GlowUp Edu",
