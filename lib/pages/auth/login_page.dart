@@ -171,12 +171,16 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding:
                         const EdgeInsets.only(top: 11, bottom: 30, right: 3),
-                    child: Text(
-                      "Forgot Password?",
-                      textAlign: TextAlign.end,
-                      style: medium(
-                        sizeFont: 14,
-                        colorFont: purpleColor,
+                    child: GestureDetector(
+                      onTap: () =>
+                          Navigator.pushNamed(context, submitEmailRoute),
+                      child: Text(
+                        "Forgot Password?",
+                        textAlign: TextAlign.end,
+                        style: medium(
+                          sizeFont: 14,
+                          colorFont: purpleColor,
+                        ),
                       ),
                     ),
                   ),

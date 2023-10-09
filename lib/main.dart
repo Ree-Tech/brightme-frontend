@@ -6,8 +6,6 @@ import 'package:camera/camera.dart';
 
 import 'package:flutter/material.dart';
 
-import 'pages/homepage/personal_consul/chat_page.dart';
-
 List<CameraDescription> cameras = [];
 
 Future<void> main() async {

@@ -1,5 +1,8 @@
 import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/pages/app_page.dart';
+import 'package:bright_me/pages/auth/forgot_password/forgot_password_page.dart';
+import 'package:bright_me/pages/auth/forgot_password/submit_email_page.dart';
+import 'package:bright_me/pages/auth/forgot_password/success_change_password.dart';
 import 'package:bright_me/pages/auth/login_page.dart';
 import 'package:bright_me/pages/auth/otp_page.dart';
 import 'package:bright_me/pages/auth/register_page.dart';
@@ -29,6 +32,13 @@ import 'package:bright_me/pages/payment/consul_paymnet_complete.dart';
 import 'package:bright_me/pages/payment/glowup_payment_complete.dart';
 import 'package:bright_me/pages/payment/instructions_payment.dart';
 import 'package:bright_me/pages/payment/payment_page.dart';
+import 'package:bright_me/pages/profile/about/app_version.dart';
+import 'package:bright_me/pages/profile/account/change_password.dart';
+import 'package:bright_me/pages/profile/account/edit_profile_page.dart';
+import 'package:bright_me/pages/profile/account/manage_account.dart';
+import 'package:bright_me/pages/profile/account/switch_account.dart';
+import 'package:bright_me/pages/profile/support/faq_page.dart';
+import 'package:bright_me/pages/profile/support/help_center_page.dart';
 import 'package:bright_me/pages/survey/survey_page.dart';
 import 'package:flutter/material.dart';
 
@@ -103,6 +113,24 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) => const RateDoctorPage());
       case chatConsulRoute:
         return MaterialPageRoute(builder: (_) => const ChatPage());
+      case manageAccountRoute:
+        return MaterialPageRoute(builder: (_) => const ManageAccount());
+      case editProfileRoute:
+        return MaterialPageRoute(builder: (_) => const EditProfilePage());
+      case switchAccountRoute:
+        return MaterialPageRoute(builder: (_) => const SwitchAccountPage());
+      case faqRoute:
+        return MaterialPageRoute(builder: (_) => const FAQPage());
+      case helpCenterRoute:
+        return MaterialPageRoute(builder: (_) => const HelpCenter());
+      case appVersionRoute:
+        return MaterialPageRoute(builder: (_) => const AppVersionPage());
+      case submitEmailRoute:
+        return MaterialPageRoute(builder: (_) => const SubmitEmailPage());
+      case resetPasswordRoute:
+        return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
+      case successChangePasswordRoute:
+        return MaterialPageRoute(builder: (_) => const SuccessChangePassword());
 
       default:
         return MaterialPageRoute(
