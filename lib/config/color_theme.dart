@@ -34,6 +34,8 @@ const Color tabColorOrder = Color.fromRGBO(251, 139, 36, 0.75);
 
 const Color middleGrey = Color(0xffEFECF1);
 
+const Color cancelOrder = Color(0xffEE4953);
+
 const LinearGradient bgColor = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,

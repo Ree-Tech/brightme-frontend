@@ -32,13 +32,21 @@ import 'package:bright_me/pages/payment/consul_paymnet_complete.dart';
 import 'package:bright_me/pages/payment/glowup_payment_complete.dart';
 import 'package:bright_me/pages/payment/instructions_payment.dart';
 import 'package:bright_me/pages/payment/payment_page.dart';
+import 'package:bright_me/pages/payment/shop_payment_complete.dart';
 import 'package:bright_me/pages/profile/about/app_version.dart';
-import 'package:bright_me/pages/profile/account/change_password.dart';
 import 'package:bright_me/pages/profile/account/edit_profile_page.dart';
 import 'package:bright_me/pages/profile/account/manage_account.dart';
 import 'package:bright_me/pages/profile/account/switch_account.dart';
 import 'package:bright_me/pages/profile/support/faq_page.dart';
 import 'package:bright_me/pages/profile/support/help_center_page.dart';
+import 'package:bright_me/pages/shop/cart_page.dart';
+import 'package:bright_me/pages/shop/liked_product_page.dart';
+import 'package:bright_me/pages/shop/new_arrivals_page.dart';
+import 'package:bright_me/pages/shop/order_confirm_page.dart';
+import 'package:bright_me/pages/shop/order_page.dart';
+import 'package:bright_me/pages/shop/payment_shop.dart';
+import 'package:bright_me/pages/shop/popular_product_page.dart';
+import 'package:bright_me/pages/shop/rate_product.dart';
 import 'package:bright_me/pages/survey/survey_page.dart';
 import 'package:flutter/material.dart';
 
@@ -131,6 +139,24 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
       case successChangePasswordRoute:
         return MaterialPageRoute(builder: (_) => const SuccessChangePassword());
+      case likedProductRoute:
+        return MaterialPageRoute(builder: (_) => const LikedProductPage());
+      case newArrivalsRoute:
+        return MaterialPageRoute(builder: (_) => const NewArrivalsPage());
+      case popularProductRoute:
+        return MaterialPageRoute(builder: (_) => const PopularProductPage());
+      case rateProductName:
+        return MaterialPageRoute(builder: (_) => const RateProduct());
+      case cartPageRoute:
+        return MaterialPageRoute(builder: (_) => const CartPage());
+      case orderConfirmRoute:
+        return MaterialPageRoute(builder: (_) => const OrderConfirmPage());
+      case paymentProductPage:
+        return MaterialPageRoute(builder: (_) => const PaymentShopPage());
+      case shopPaymentCompleteRoute:
+        return MaterialPageRoute(builder: (_) => const ShopPaymentComplete());
+      case orderProductRoute:
+        return MaterialPageRoute(builder: (_) => const OrderPage());
 
       default:
         return MaterialPageRoute(

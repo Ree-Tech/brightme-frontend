@@ -22,6 +22,7 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   int? selectedDigitalRadioTile;
   int? selectedBankRadioTile;
+  int? selectedVaRadioTile;
 
   String paymentUser = "";
 
@@ -62,12 +63,12 @@ class _PaymentPageState extends State<PaymentPage> {
                         ),
                       ),
                       Column(
-                        children: digitalPayment
+                        children: ewalletpayment
                             .map((item) => CustomRadio(
                                   label: Image.asset(
                                     item['image'],
-                                    width: 74,
-                                    height: 16,
+                                    width: 81,
+                                    height: item['id'] == 0 ? 26 : 47,
                                     alignment: Alignment.centerLeft,
                                   ),
                                   groupValue: selectedDigitalRadioTile,
@@ -76,8 +77,9 @@ class _PaymentPageState extends State<PaymentPage> {
                                     setState(() {
                                       selectedDigitalRadioTile = value;
                                       selectedBankRadioTile = null;
+                                      selectedVaRadioTile = null;
                                     });
-                                    paymentUser = digitalPayment[
+                                    paymentUser = ewalletpayment[
                                         selectedDigitalRadioTile!]['payment'];
                                   },
                                 ))
@@ -97,8 +99,8 @@ class _PaymentPageState extends State<PaymentPage> {
                             .map((item) => CustomRadio(
                                   label: Image.asset(
                                     item['image'],
-                                    width: 74,
-                                    height: 16,
+                                    width: 80,
+                                    height: item['id'] == 1 ? 47 : 26,
                                     alignment: Alignment.centerLeft,
                                   ),
                                   groupValue: selectedBankRadioTile,
@@ -107,9 +109,43 @@ class _PaymentPageState extends State<PaymentPage> {
                                     setState(() {
                                       selectedBankRadioTile = value;
                                       selectedDigitalRadioTile = null;
+                                      selectedVaRadioTile = null;
                                     });
                                     paymentUser =
                                         bankPayment[selectedBankRadioTile!]
+                                            ['payment'];
+                                  },
+                                ))
+                            .toList(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30, bottom: 16),
+                        child: Text(
+                          "Virtual Account",
+                          style: semiBold(
+                            sizeFont: 14,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: vaPayment
+                            .map((item) => CustomRadio(
+                                  label: Image.asset(
+                                    item['image'],
+                                    width: 80,
+                                    height: item['id'] == 1 ? 47 : 26,
+                                    alignment: Alignment.centerLeft,
+                                  ),
+                                  groupValue: selectedVaRadioTile,
+                                  value: item['id'],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedVaRadioTile = value;
+                                      selectedBankRadioTile = null;
+                                      selectedDigitalRadioTile = null;
+                                    });
+                                    paymentUser =
+                                        bankPayment[selectedVaRadioTile!]
                                             ['payment'];
                                   },
                                 ))
