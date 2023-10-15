@@ -2,6 +2,7 @@ import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/constants/home_fitur_data.dart';
+import 'package:bright_me/models/user.dart';
 import 'package:bright_me/widget/news_card.dart';
 import 'package:bright_me/widget/product_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                                 width: 4,
                               ),
                               Text(
-                                "Aurelia,",
+                                currUser.name ?? "",
                                 style: semiBold(
                                   sizeFont: 14,
                                   colorFont: whiteColor,

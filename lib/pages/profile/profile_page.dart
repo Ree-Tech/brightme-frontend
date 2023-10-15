@@ -1,6 +1,7 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/constants/profile_data.dart';
+import 'package:bright_me/models/user.dart';
 import 'package:bright_me/widget/custom_button.dart';
 import 'package:bright_me/widget/custom_radio.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 30),
                         child: Text(
-                          "Aurelia Sukianto",
+                          currUser.name ?? "",
                           style: semiBold(
                             sizeFont: 16,
                           ),

@@ -62,7 +62,10 @@ class RouteGenarator {
       case surveyRoute:
         return MaterialPageRoute(builder: (_) => const SurveyPage());
       case otpRoute:
-        return MaterialPageRoute(builder: (_) => const OtpPage());
+        return MaterialPageRoute(
+            builder: (_) => OtpPage(
+                  email: settings.arguments as String,
+                ));
       case appRoute:
         return MaterialPageRoute(builder: (_) => const AppPages());
       case cameraPageRoute:

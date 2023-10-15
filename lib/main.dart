@@ -1,15 +1,23 @@
+import 'package:bright_me/bloc/auth/auth_bloc.dart';
+import 'package:bright_me/bloc/user/user_bloc.dart';
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/route.dart';
 import 'package:bright_me/pages/app_page.dart';
+import 'package:bright_me/pages/onboarding/onboarding_page.dart';
 
 import 'package:camera/camera.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_storage/get_storage.dart';
 
 List<CameraDescription> cameras = [];
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  await GetStorage.init();
   cameras = await availableCameras();
 
   runApp(const MyApp());
@@ -20,13 +28,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: "Poppins",
-        scaffoldBackgroundColor: whiteColor,
-      ),
-      onGenerateRoute: RouteGenarator.generateRoute,
-      home: AppPages(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AuthBloc()..add(HasLoginEvent())),
+        BlocProvider(create: (context) => UserBloc()..add(FetchUserEvent())),
+      ],
+      child: MaterialApp(
+          theme: ThemeData(
+            fontFamily: "Poppins",
+            scaffoldBackgroundColor: whiteColor,
+          ),
+          onGenerateRoute: RouteGenarator.generateRoute,
+          home: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is Authenticated) {
+                return const AppPages();
+              }
+              return const OnboardingPage();
+            },
+          )),
     );
   }
 }

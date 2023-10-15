@@ -1,3 +1,4 @@
+import 'package:bright_me/bloc/user/user_bloc.dart';
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/pages/activity/activity_page.dart';
@@ -5,7 +6,9 @@ import 'package:bright_me/pages/detection/detection_popup.dart';
 import 'package:bright_me/pages/homepage/home_page.dart';
 import 'package:bright_me/pages/profile/profile_page.dart';
 import 'package:bright_me/pages/shop/shop_page.dart';
+import 'package:bright_me/widget/loading_wigdet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppPages extends StatefulWidget {
   const AppPages({super.key});
@@ -28,7 +31,14 @@ class _AppPagesState extends State<AppPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is FetchUserLoading) {
+            return const LoadingWidget();
+          }
+          return _pages[_currentIndex];
+        },
+      ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(34.0),
