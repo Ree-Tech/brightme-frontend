@@ -1,5 +1,6 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
+import 'package:bright_me/constants/news_const.dart';
 import 'package:bright_me/widget/news_card.dart';
 
 import 'package:flutter/material.dart';
@@ -116,7 +117,9 @@ class _NewsPageState extends State<NewsPage> {
           child: ListView.builder(
             itemCount: 8,
             itemBuilder: (context, index) {
-              return const NewsCard(
+              return NewsCard(
+                title: newsConst[index]["title"]!,
+                image: newsConst[index]["image"]!,
                 space: 8,
               );
             },
