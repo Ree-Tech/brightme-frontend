@@ -19,23 +19,23 @@ class _CommunityPageState extends State<CommunityPage> {
         child: Column(
           children: [
             Padding(
+              padding: const EdgeInsets.only(top: 30, left: 15),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: whiteColor,
+                    )),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 30,
               ),
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: whiteColor,
-                        )),
-                  ),
                   const SizedBox(
                     height: 30,
                   ),

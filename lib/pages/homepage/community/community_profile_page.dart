@@ -12,16 +12,20 @@ class CommunityProfilePage extends StatelessWidget {
       backgroundColor: purpleColor,
       body: SafeArea(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 20),
           child: Stack(
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: whiteColor,
-                    )),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: whiteColor,
+                      )),
+                ),
               ),
               Container(
                 width: double.infinity,
