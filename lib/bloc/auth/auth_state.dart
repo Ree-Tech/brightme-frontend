@@ -41,6 +41,10 @@ final class LoginLoading extends AuthState {}
 
 final class LoginSuccess extends AuthState {}
 
+final class LoginGoogleCancel extends AuthState {}
+
+final class UserSurvey extends AuthState {}
+
 final class LoginEror extends AuthState {
   final String text;
 
@@ -57,6 +61,32 @@ final class ConfirmEror extends AuthState {
   final String text;
 
   const ConfirmEror(this.text);
+
+  @override
+  List<Object> get props => [text];
+}
+
+final class EmailResetPasswordLoading extends AuthState {}
+
+final class EmailResetPasswordSuccess extends AuthState {}
+
+final class EmailResetPasswordEror extends AuthState {
+  final String text;
+
+  const EmailResetPasswordEror(this.text);
+
+  @override
+  List<Object> get props => [text];
+}
+
+final class ResetPasswordLoading extends AuthState {}
+
+final class ResetPasswordSucces extends AuthState {}
+
+final class ResetPasswordEror extends AuthState {
+  final String text;
+
+  const ResetPasswordEror(this.text);
 
   @override
   List<Object> get props => [text];

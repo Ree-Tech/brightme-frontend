@@ -1,14 +1,19 @@
-import 'package:bright_me/config/color_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'package:bright_me/config/color_theme.dart';
+
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({super.key});
+  final Color? color;
+  const LoadingWidget({
+    Key? key,
+    this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: CircularProgressIndicator(
-        color: purpleColor,
+        color: color ?? purpleColor,
       ),
     );
   }

@@ -51,3 +51,31 @@ class ConfirmAccountEvent extends AuthEvent {
 class LogoutEvent extends AuthEvent {}
 
 class HasLoginEvent extends AuthEvent {}
+
+class EmailResetPasswordEvent extends AuthEvent {
+  final String email;
+
+  const EmailResetPasswordEvent(this.email);
+
+  @override
+  List<Object> get props => [email];
+}
+
+class ResetPasswordEvent extends AuthEvent {
+  final String email;
+  final String code;
+  final String password;
+  final String confirmPassword;
+
+  const ResetPasswordEvent(
+    this.email,
+    this.code,
+    this.password,
+    this.confirmPassword,
+  );
+
+  @override
+  List<Object> get props => [email, code, password, confirmPassword];
+}
+
+class LoginGoogleEvent extends AuthEvent {}

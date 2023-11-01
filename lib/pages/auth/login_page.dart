@@ -38,9 +38,19 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, appRoute);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              appRoute,
+              (route) => false,
+            );
           } else if (state is LoginEror) {
             showSnackBar(context, state.text);
+          } else if (state is UserSurvey) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              surveyRoute,
+              (route) => false,
+            );
           }
         },
         builder: (context, state) {
@@ -233,7 +243,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
 
                     OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<AuthBloc>().add(LoginGoogleEvent());
+                        },
                         style: OutlinedButton.styleFrom(
                             fixedSize: const Size(double.infinity, 48),
                             shape: const StadiumBorder(),

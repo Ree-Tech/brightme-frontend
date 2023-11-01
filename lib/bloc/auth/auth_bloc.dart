@@ -41,7 +41,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         var response =
             await _authServices.loginServices(event.email, event.password);
 
-        if (response) emit(LoginSuccess());
+        if (response != null) {
+          response ? emit(LoginSuccess()) : emit(UserSurvey());
+        }
       } catch (eror) {
         emit(LoginEror("eror at LoginEvent: ${eror.toString()} "));
       }
@@ -63,6 +65,62 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             : emit(const LogoutEror("fail Logout"));
       } catch (eror) {
         emit(LogoutEror("eror at logoutevent ; ${eror.toString()}"));
+      }
+    });
+
+    on<EmailResetPasswordEvent>((event, emit) async {
+      emit(EmailResetPasswordLoading());
+
+      try {
+        var response =
+            await _authServices.emailResetPasswordServices(event.email);
+
+        response
+            ? emit(EmailResetPasswordSuccess())
+            : emit(const EmailResetPasswordEror("Send email fail"));
+      } catch (eror) {
+        emit(EmailResetPasswordEror(eror.toString()));
+      }
+    });
+
+    on<ResetPasswordEvent>((event, emit) async {
+      emit(ResetPasswordLoading());
+      try {
+        var response = await _authServices.resetPasswordServices(
+          event.email,
+          event.code,
+          event.password,
+          event.confirmPassword,
+        );
+
+        response
+            ? emit(ResetPasswordSucces())
+            : emit(const ResetPasswordEror("Reset password fail"));
+      } catch (eror) {
+        emit(ResetPasswordEror(eror.toString()));
+      }
+    });
+
+    on<LoginGoogleEvent>((event, emit) async {
+      try {
+        var firebaseSigin = await _authServices.signinFirebase();
+
+        if (firebaseSigin != null) {
+          emit(LoginLoading());
+
+          var response = await _authServices.loginWithGoogle(
+            firebaseSigin['name'],
+            firebaseSigin['email'],
+          );
+
+          if (response != null) {
+            response ? emit(LoginSuccess()) : emit(UserSurvey());
+          }
+        } else {
+          emit(LoginGoogleCancel());
+        }
+      } catch (eror) {
+        emit(LoginEror(eror.toString()));
       }
     });
   }

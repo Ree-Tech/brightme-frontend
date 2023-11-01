@@ -2,19 +2,17 @@ import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:flutter/material.dart';
 
-void showSnackBar(
-  BuildContext context,
-  String text,
-) {
+void showSnackBar(BuildContext context, String text,
+    [Color? textColor, Color? bgColor]) {
   final snackBar = SnackBar(
     content: Text(
       text,
       style: medium(
-        colorFont: whiteColor,
+        colorFont: textColor ?? whiteColor,
         sizeFont: 12,
       ),
     ),
-    backgroundColor: purpleColor,
+    backgroundColor: bgColor ?? purpleColor,
     duration: const Duration(seconds: 2),
     behavior: SnackBarBehavior.floating,
     margin: const EdgeInsets.only(
