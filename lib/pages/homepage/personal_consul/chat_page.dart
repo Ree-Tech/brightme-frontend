@@ -202,7 +202,10 @@ class _ChatPageState extends State<ChatPage> {
         ));
   }
 
-  Widget itemBuilder(String image, String name) {
+  Widget itemBuilder(
+    String image,
+    String name,
+  ) {
     return Row(
       children: [
         ClipRRect(
@@ -220,11 +223,10 @@ class _ChatPageState extends State<ChatPage> {
         Container(
           width: 140,
           height: 120,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
                 topRight: Radius.circular(24),
                 bottomRight: Radius.circular(24)),
-            boxShadow: boxShadow,
             color: lightWhite,
           ),
           child: Padding(
@@ -234,7 +236,7 @@ class _ChatPageState extends State<ChatPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Natural Daily Aloe Hydramild Gel ",
+                  name,
                   style: medium(
                     colorFont: blackColor,
                     sizeFont: 12,

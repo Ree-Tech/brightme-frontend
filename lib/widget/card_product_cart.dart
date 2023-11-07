@@ -1,21 +1,18 @@
+import 'package:bright_me/bloc/cart/cart_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
+import 'package:bright_me/models/cart.dart';
 
 class CartProductCard extends StatefulWidget {
-  final String image;
-  final String name;
-  final String subName;
-  final String price;
+  final Cart cart;
 
   const CartProductCard({
     Key? key,
-    required this.image,
-    required this.name,
-    required this.subName,
-    required this.price,
+    required this.cart,
   }) : super(key: key);
 
   @override
@@ -23,7 +20,53 @@ class CartProductCard extends StatefulWidget {
 }
 
 class _CartProductCardState extends State<CartProductCard> {
-  bool isCheck = false;
+  late bool isCheck;
+  late int productCounter;
+  late String productPrice;
+
+  @override
+  void initState() {
+    productCounter = int.parse(widget.cart.quantity);
+    isCheck = widget.cart.isCheck;
+    productPrice =
+        widget.cart.productVariation.discountProductPrice(productCounter);
+    super.initState();
+  }
+
+  void increaseProduct() {
+    setState(() {
+      productCounter++;
+      widget.cart.quantity = productCounter.toString();
+      productPrice =
+          widget.cart.productVariation.discountProductPrice(productCounter);
+    });
+
+    context.read<CartBloc>().add(UpdateQuantityItemEvent(
+          widget.cart.id,
+          productCounter,
+        ));
+  }
+
+  void derecsesProduct() {
+    if (productCounter > 1) {
+      setState(() {
+        productCounter--;
+        widget.cart.quantity = productCounter.toString();
+        productPrice =
+            widget.cart.productVariation.discountProductPrice(productCounter);
+      });
+
+      context.read<CartBloc>().add(UpdateQuantityItemEvent(
+            widget.cart.id,
+            productCounter,
+          ));
+    } else {
+      context.read<CartBloc>().add(DeleteCartItemEvent(
+            widget.cart.id,
+          ));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,7 +77,11 @@ class _CartProductCardState extends State<CartProductCard> {
           motion: const BehindMotion(),
           children: [
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CartBloc>().add(DeleteCartItemEvent(
+                        widget.cart.id,
+                      ));
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: whiteColor,
                     fixedSize: const Size(32, 32),
@@ -56,11 +103,17 @@ class _CartProductCardState extends State<CartProductCard> {
                   setState(() {
                     isCheck = value!;
                   });
+                  int check = isCheck ? 1 : 0;
+
+                  context
+                      .read<CartBloc>()
+                      .add(UpdateCheckItemEvent(widget.cart.id, check));
                 },
               ),
             ),
             Container(
               height: 160,
+              width: 310,
               decoration: BoxDecoration(
                   color: lightWhite,
                   borderRadius: BorderRadius.circular(24),
@@ -71,11 +124,13 @@ class _CartProductCardState extends State<CartProductCard> {
                     borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                         bottomLeft: Radius.circular(12)),
-                    child: SizedBox(
-                      height: 130,
+                    child: Container(
+                      color: lightPuprle,
+                      height: 160,
                       width: 110,
                       child: Image.network(
-                        widget.image,
+                        widget
+                            .cart.productVariation.product.productImages[0].img,
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -93,7 +148,6 @@ class _CartProductCardState extends State<CartProductCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // saya ingin text di dalam column dapat membuat baris baru apabila sudah
                         SizedBox(
                           height: 80,
                           width: 150,
@@ -102,7 +156,7 @@ class _CartProductCardState extends State<CartProductCard> {
                             children: [
                               Flexible(
                                 child: Text(
-                                  widget.name,
+                                  widget.cart.productVariation.product.name,
                                   style: medium(
                                     colorFont: blackColor,
                                     sizeFont: 12,
@@ -114,13 +168,32 @@ class _CartProductCardState extends State<CartProductCard> {
                                 height: 10,
                               ),
                               Flexible(
-                                child: Text(
-                                  widget.subName,
-                                  style: reguler(
-                                    sizeFont: 10,
-                                    colorFont: greyColor,
-                                  ),
-                                  softWrap: true,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      widget
+                                          .cart.productVariation.product.brand,
+                                      style: reguler(
+                                        sizeFont: 10,
+                                        colorFont: greyColor,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4),
+                                      child: Icon(Icons.fiber_manual_record,
+                                          color: greyColor, size: 4),
+                                    ),
+                                    Text(
+                                      widget.cart.productVariation.name,
+                                      style: reguler(
+                                        sizeFont: 10,
+                                        colorFont: greyColor,
+                                      ),
+                                      softWrap: true,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -132,7 +205,7 @@ class _CartProductCardState extends State<CartProductCard> {
                         Row(
                           children: [
                             Text(
-                              widget.price,
+                              "Rp $productPrice",
                               style: semiBold(
                                 colorFont: purpleColor,
                                 sizeFont: 12,
@@ -143,14 +216,17 @@ class _CartProductCardState extends State<CartProductCard> {
                             ),
                             Row(
                               children: [
-                                const CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: greyButton,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.remove,
-                                      color: blackColor,
-                                      size: 17,
+                                GestureDetector(
+                                  onTap: () => derecsesProduct(),
+                                  child: const CircleAvatar(
+                                    radius: 14,
+                                    backgroundColor: greyButton,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.remove,
+                                        color: blackColor,
+                                        size: 17,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -158,20 +234,23 @@ class _CartProductCardState extends State<CartProductCard> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12),
                                   child: Text(
-                                    "2",
+                                    "$productCounter",
                                     style: medium(
                                       sizeFont: 12,
                                     ),
                                   ),
                                 ),
-                                const CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: greyButton,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.add,
-                                      color: blackColor,
-                                      size: 17,
+                                GestureDetector(
+                                  onTap: () => increaseProduct(),
+                                  child: const CircleAvatar(
+                                    radius: 14,
+                                    backgroundColor: greyButton,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.add,
+                                        color: blackColor,
+                                        size: 17,
+                                      ),
                                     ),
                                   ),
                                 ),

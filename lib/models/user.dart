@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   int? id;
   String? name;
   String? email;
@@ -6,9 +6,10 @@ class User {
   String? phone;
   String? birthdate;
   int? roleId;
+  String? gender;
   String? jwt;
 
-  User({
+  UserModel({
     required this.id,
     required this.name,
     required this.email,
@@ -16,11 +17,12 @@ class User {
     required this.phone,
     required this.birthdate,
     required this.roleId,
+    this.gender,
     this.jwt,
   });
 }
 
-User currUser = User(
+UserModel currUser = UserModel(
   id: null,
   name: null,
   email: null,
@@ -29,4 +31,5 @@ User currUser = User(
   birthdate: null,
   roleId: null,
   jwt: null,
+  gender: null,
 );

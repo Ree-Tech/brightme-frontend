@@ -21,3 +21,29 @@ final class FetchUserEror extends UserState {
   @override
   List<Object> get props => [text];
 }
+
+final class UpdateProfileUserLoading extends UserState {}
+
+final class UpdateProfileUserSuccess extends UserState {}
+
+final class UpdateProfileUserEror extends UserState {
+  final String text;
+
+  const UpdateProfileUserEror(this.text);
+
+  @override
+  List<Object> get props => [text];
+}
+
+final class SurveyUserLoading extends UserState {}
+
+final class SurveyUserSuccess extends UserState {}
+
+final class SurveyUserEror extends UserState {
+  final String text;
+
+  const SurveyUserEror(this.text);
+
+  @override
+  List<Object> get props => [text];
+}

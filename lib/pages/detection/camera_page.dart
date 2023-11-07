@@ -24,7 +24,6 @@ class _CameraPageState extends State<CameraPage> {
   bool _isFlashOn = false;
   String imagePath = '';
   final ImagePicker _picker = ImagePicker();
-  bool _showContainer = true;
 
   @override
   void dispose() {
@@ -35,11 +34,7 @@ class _CameraPageState extends State<CameraPage> {
   @override
   void initState() {
     onNewCameraSelected(cameras[1]);
-    Timer(const Duration(seconds: 3), () {
-      setState(() {
-        _showContainer = false;
-      });
-    });
+
     super.initState();
   }
 
@@ -120,24 +115,18 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   //take picture user
-  Future<void> capturePhoto() async {
-    if (!controller!.value.isInitialized) {
-      return;
+  Future<XFile?> takePicture() async {
+    final CameraController? cameraController = controller;
+    if (cameraController!.value.isTakingPicture) {
+      // A capture is already pending, do nothing.
+      return null;
     }
-
     try {
-      final Directory appDir = await getApplicationDocumentsDirectory();
-      final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-      final String filePath = '${appDir.path}/$timestamp.jpg';
-
-      await controller!.takePicture();
-
-      setState(() {
-        imagePath = filePath;
-      });
-      handleResultPage();
-    } catch (e) {
-      print('Error capturing photo: ${e.toString()}');
+      XFile file = await cameraController.takePicture();
+      return file;
+    } on CameraException catch (e) {
+      print('Error occured while taking picture: $e');
+      return null;
     }
   }
 
@@ -149,16 +138,18 @@ class _CameraPageState extends State<CameraPage> {
         setState(() {
           imagePath = pickedFile.path;
         });
+
+        handleResultPage(imagePath);
       }
-      print(imagePath);
     } catch (e) {
       print('Error picking image from gallery: ${e.toString()}');
     }
   }
 
   //navigate to result page ML
-  handleResultPage() {
-    Navigator.pushReplacementNamed(context, processResultRoute);
+  handleResultPage(String path) {
+    Navigator.pushReplacementNamed(context, processResultRoute,
+        arguments: path);
   }
 
   @override
@@ -205,27 +196,25 @@ class _CameraPageState extends State<CameraPage> {
                                             ))
                                       ],
                                     ),
-                                    if (_showContainer)
-                                      Container(
-                                        width: 275,
-                                        height: 85,
-                                        margin: const EdgeInsets.only(top: 20),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(34),
-                                          color: lightPuprle,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "Please face the camera and adjust\nyour face accordingly",
-                                            style: semiBold(
-                                              sizeFont: 14,
-                                              colorFont: purpleColor,
-                                            ),
-                                            textAlign: TextAlign.center,
+                                    Container(
+                                      width: 275,
+                                      height: 85,
+                                      margin: const EdgeInsets.only(top: 20),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(34),
+                                        color: lightPuprle,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "Please face the camera and adjust\nyour face accordingly",
+                                          style: semiBold(
+                                            sizeFont: 14,
+                                            colorFont: purpleColor,
                                           ),
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
+                                    ),
                                   ],
                                 ),
                               )),
@@ -259,7 +248,21 @@ class _CameraPageState extends State<CameraPage> {
                             )),
                         InkWell(
                             onTap: () async {
-                              await capturePhoto();
+                              XFile? rawImage = await takePicture();
+                              File imageFile = File(rawImage!.path);
+
+                              handleResultPage(rawImage.path);
+
+                              int currentUnix =
+                                  DateTime.now().millisecondsSinceEpoch;
+                              final directory =
+                                  await getApplicationDocumentsDirectory();
+                              String fileFormat =
+                                  imageFile.path.split('.').last;
+
+                              await imageFile.copy(
+                                '${directory.path}/$currentUnix.$fileFormat',
+                              );
                             },
                             child: const Icon(
                               Icons.camera,

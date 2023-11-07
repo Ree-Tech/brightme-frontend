@@ -1,4 +1,5 @@
 import 'package:bright_me/config/route_name.dart';
+import 'package:bright_me/models/product.dart';
 import 'package:bright_me/pages/app_page.dart';
 import 'package:bright_me/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:bright_me/pages/auth/forgot_password/submit_email_page.dart';
@@ -15,6 +16,7 @@ import 'package:bright_me/pages/homepage/community/community_profile_page.dart';
 import 'package:bright_me/pages/homepage/community/join_community.dart';
 import 'package:bright_me/pages/homepage/detail_new_page.dart';
 import 'package:bright_me/pages/homepage/glowup_edu/glowup_edu.dart';
+import 'package:bright_me/pages/homepage/glowup_edu/glowup_edu_detail.dart';
 import 'package:bright_me/pages/homepage/glowup_plan/glowup_detail.dart';
 import 'package:bright_me/pages/homepage/glowup_plan/glowup_plan.dart';
 import 'package:bright_me/pages/homepage/glowup_plan/menu_glowup.dart';
@@ -40,6 +42,7 @@ import 'package:bright_me/pages/profile/account/switch_account.dart';
 import 'package:bright_me/pages/profile/support/faq_page.dart';
 import 'package:bright_me/pages/profile/support/help_center_page.dart';
 import 'package:bright_me/pages/shop/cart_page.dart';
+import 'package:bright_me/pages/shop/detail_product.dart';
 import 'package:bright_me/pages/shop/liked_product_page.dart';
 import 'package:bright_me/pages/shop/new_arrivals_page.dart';
 import 'package:bright_me/pages/shop/order_confirm_page.dart';
@@ -71,7 +74,10 @@ class RouteGenarator {
       case cameraPageRoute:
         return MaterialPageRoute(builder: (_) => const CameraPage());
       case processResultRoute:
-        return MaterialPageRoute(builder: (_) => const ProcessResultPage());
+        return MaterialPageRoute(
+            builder: (_) => ProcessResultPage(
+                  imagePath: settings.arguments as String,
+                ));
       case recommendedProduct:
         return MaterialPageRoute(builder: (_) => const RecommendationPage());
       case newsRoute:
@@ -160,6 +166,13 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) => const ShopPaymentComplete());
       case orderProductRoute:
         return MaterialPageRoute(builder: (_) => const OrderPage());
+      case productDetailRoute:
+        return MaterialPageRoute(
+            builder: (_) => DetailProductPage(
+                  product: settings.arguments as Product,
+                ));
+      case glowupEduDetail:
+        return MaterialPageRoute(builder: (_) => const GlowUpEduDetail());
 
       default:
         return MaterialPageRoute(

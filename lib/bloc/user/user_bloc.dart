@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bright_me/models/user.dart';
 import 'package:bright_me/services/user_services.dart';
 import 'package:equatable/equatable.dart';
 
@@ -18,6 +19,33 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       } catch (eror) {
         emit(
             FetchUserEror("There is eror FetchUserEvent : ${eror.toString()}"));
+      }
+    });
+
+    on<SurveyUserEvent>((event, emit) async {
+      emit(SurveyUserLoading());
+      try {
+        var response = await _userServices.surveyUser(
+            event.age, event.skinType, event.skinProblem);
+
+        response
+            ? emit(SurveyUserSuccess())
+            : emit(const SurveyUserEror("upload survey fail"));
+      } catch (eror) {
+        emit(SurveyUserEror(eror.toString()));
+      }
+    });
+
+    on<UpdateProfileUserEvent>((event, emit) async {
+      emit(UpdateProfileUserLoading());
+      try {
+        var response = await _userServices.updateUserProile(event.updateUser);
+
+        response
+            ? emit(UpdateProfileUserSuccess())
+            : emit(const UpdateProfileUserEror("update profile fail"));
+      } catch (eror) {
+        emit(UpdateProfileUserEror(eror.toString()));
       }
     });
   }

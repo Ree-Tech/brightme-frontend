@@ -1,8 +1,12 @@
+import 'package:bright_me/bloc/product/product_bloc.dart';
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/config/route_name.dart';
+import 'package:bright_me/models/product.dart';
+import 'package:bright_me/widget/loading_wigdet.dart';
 import 'package:bright_me/widget/product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -102,225 +106,130 @@ class _ShopPageState extends State<ShopPage> {
                 )),
           )
         ],
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Text(
-                  'Special Offer',
-                  style: semiBold(
-                    sizeFont: 16,
-                    colorFont: blackColor,
-                  ),
-                ),
-              ),
-              Container(
-                height: 130,
-                decoration: BoxDecoration(
-                    color: lightWhite,
-                    borderRadius: BorderRadius.circular(24),
-                    boxShadow: boxShadow),
-                child: Row(
+        body: BlocBuilder<ProductBloc, ProductState>(
+          builder: (context, state) {
+            if (state is AllProductLoading) {
+              return const LoadingWidget();
+            } else if (state is AllProductSucces) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          bottomLeft: Radius.circular(12)),
-                      child: SizedBox(
-                        height: 130,
-                        width: 140,
-                        child: Image.network(
-                          'https://s4.bukalapak.com/img/42747563182/s-463-463/data.png.webp',
-                          fit: BoxFit.cover,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Text(
+                        'Special Offer',
+                        style: semiBold(
+                          sizeFont: 16,
+                          colorFont: blackColor,
                         ),
                       ),
                     ),
-                    Container(
-                      width: 190,
-                      height: 170,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(24),
-                            bottomRight: Radius.circular(24)),
-                        color: lightWhite,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 15, left: 15, bottom: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Travel Pack - True Brotherrhod ",
+                    spescialOfferWidget(spescialOffer[0]),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, bottom: 23),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Popular products',
+                            style: semiBold(
+                              sizeFont: 16,
+                              colorFont: blackColor,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              popularProductRoute,
+                            ),
+                            child: Text(
+                              'View More',
                               style: medium(
-                                colorFont: blackColor,
                                 sizeFont: 12,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            Text(
-                              "Nourishing beard, energizin and brightening face, hair and body wash, Leaflet",
-                              style: reguler(
-                                sizeFont: 10,
                                 colorFont: greyColor,
                               ),
                             ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.star_sharp,
-                                  color: yellowColor,
-                                  size: 12,
-                                ),
-                                const SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  "5.0",
-                                  style: medium(
-                                    colorFont: yellowColor,
-                                    sizeFont: 10,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "Rp35.100",
-                                  style: semiBold(
-                                    colorFont: purpleColor,
-                                    sizeFont: 12,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 2,
-                                ),
-                                const Text("Rp74.000",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: greyColor,
-                                      decoration: TextDecoration.lineThrough,
-                                      decorationColor: purpleColor,
-                                    ))
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 23),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Popular products',
-                      style: semiBold(
-                        sizeFont: 16,
-                        colorFont: blackColor,
+                          )
+                        ],
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        popularProductRoute,
-                      ),
-                      child: Text(
-                        'View More',
-                        style: medium(
-                          sizeFont: 12,
-                          colorFont: greyColor,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ProductCard(),
-                  ProductCard(),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 23),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'New Arrivals',
-                      style: semiBold(
-                        sizeFont: 16,
-                        colorFont: blackColor,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ProductCard(product: populerProduct[0]),
+                        ProductCard(product: populerProduct[1]),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, bottom: 23),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'New Arrivals',
+                            style: semiBold(
+                              sizeFont: 16,
+                              colorFont: blackColor,
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, newArrivalsRoute),
+                            child: Text(
+                              'View More',
+                              style: medium(
+                                sizeFont: 12,
+                                colorFont: greyColor,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () =>
-                          Navigator.pushNamed(context, newArrivalsRoute),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ProductCard(product: arrivalProduct[0]),
+                        ProductCard(product: arrivalProduct[1]),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
                       child: Text(
-                        'View More',
-                        style: medium(
-                          sizeFont: 12,
-                          colorFont: greyColor,
+                        'Discover All Products',
+                        style: semiBold(
+                          sizeFont: 16,
+                          colorFont: blackColor,
                         ),
                       ),
-                    )
+                    ),
+                    GridView.builder(
+                      physics: const ScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.5,
+                        mainAxisExtent: 270,
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16,
+                        crossAxisSpacing: 16,
+                      ),
+                      itemCount: allProduct.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ProductCard(product: allProduct[index]);
+                      },
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
                   ],
                 ),
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ProductCard(),
-                  ProductCard(),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Text(
-                  'Discover All Products',
-                  style: semiBold(
-                    sizeFont: 16,
-                    colorFont: blackColor,
-                  ),
-                ),
-              ),
-              GridView.builder(
-                physics: const ScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 0.5,
-                  mainAxisExtent: 250,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                ),
-                itemCount: 4,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return const ProductCard();
-                },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
+              );
+            }
+            return Container();
+          },
         ),
       ),
     );
@@ -341,5 +250,124 @@ class _ShopPageState extends State<ShopPage> {
           icon,
           color: purpleColor,
         ));
+  }
+
+  Widget spescialOfferWidget(Product product) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(
+        context,
+        productDetailRoute,
+        arguments: product,
+      ),
+      child: Container(
+        height: 130,
+        margin: const EdgeInsets.only(
+          top: 16,
+        ),
+        decoration: BoxDecoration(
+            color: lightWhite,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: boxShadow),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  bottomLeft: Radius.circular(12)),
+              child: Container(
+                color: lightPuprle,
+                height: 130,
+                width: 140,
+                child: Image.network(
+                  product.productImages[0].img,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            Container(
+              width: 190,
+              height: 170,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(24),
+                    bottomRight: Radius.circular(24)),
+                color: lightWhite,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15, left: 15, bottom: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      product.name,
+                      style: medium(
+                        colorFont: blackColor,
+                        sizeFont: 12,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      product.summary,
+                      style: reguler(
+                        sizeFont: 10,
+                        colorFont: greyColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star_sharp,
+                          color: yellowColor,
+                          size: 12,
+                        ),
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        Text(
+                          "5.0",
+                          style: medium(
+                            colorFont: yellowColor,
+                            sizeFont: 10,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text("Rp ${product.productVariations[0].price}",
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: greyColor,
+                              decoration: TextDecoration.lineThrough,
+                              decorationColor: purpleColor,
+                            )),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          "Rp ${product.discountPrice(0)}",
+                          style: semiBold(
+                            colorFont: purpleColor,
+                            sizeFont: 12,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

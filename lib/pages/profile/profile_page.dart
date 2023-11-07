@@ -49,12 +49,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      "Settings",
+                      "Account",
                       style: medium(sizeFont: 14),
                     ),
                     menuBuilder(accountData),
                     Text(
-                      "Account",
+                      "Settings",
                       style: medium(sizeFont: 14),
                     ),
                     menuBuilder(settingData),

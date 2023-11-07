@@ -1,5 +1,6 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
+import 'package:bright_me/config/route_name.dart';
 import 'package:flutter/material.dart';
 
 class GlowUpEduPage extends StatelessWidget {
@@ -11,32 +12,49 @@ class GlowUpEduPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 200,
-            floating: false,
-            pinned: true,
+            toolbarHeight: 200,
             centerTitle: true,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(24),
                   bottomRight: Radius.circular(24)),
             ),
-            flexibleSpace: Padding(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Text(
-                      "GlowUp Education",
-                      style: semiBold(
-                        sizeFont: 20,
-                        colorFont: whiteColor,
-                      ),
-                    ),
+            elevation: 0,
+            leading: Padding(
+              padding: const EdgeInsets.only(
+                top: 40,
+                bottom: 80,
+              ),
+              child: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: whiteColor,
+                  )),
+            ),
+            backgroundColor: purpleColor,
+            title: Padding(
+              padding: const EdgeInsets.only(
+                top: 40,
+                bottom: 80,
+              ),
+              child: Text(
+                "GlowUp Education",
+                style: semiBold(
+                  sizeFont: 20,
+                  colorFont: whiteColor,
+                ),
+              ),
+            ),
+            flexibleSpace: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 30,
+                    left: 40,
+                    right: 40,
                   ),
-                  SizedBox(
-                    width: 268,
+                  child: SizedBox(
                     height: 32,
                     child: TextField(
                       decoration: InputDecoration(
@@ -70,10 +88,7 @@ class GlowUpEduPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            backgroundColor: purpleColor,
+                )),
           ),
           SliverList(
             delegate: SliverChildListDelegate(
@@ -83,17 +98,9 @@ class GlowUpEduPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        "assets/images/banne_edu1.png",
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Image.asset("assets/images/banne_edu2.png"),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Image.asset("assets/images/banne_edu3.png"),
+                      bannerImage("assets/images/banne_edu1.png", context),
+                      bannerImage("assets/images/banne_edu2.png", context),
+                      bannerImage("assets/images/banne_edu3.png", context),
                     ],
                   ),
                 ),
@@ -101,6 +108,21 @@ class GlowUpEduPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget bannerImage(
+    String image,
+    BuildContext context,
+  ) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, glowupEduDetail),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Image.asset(
+          image,
+        ),
       ),
     );
   }

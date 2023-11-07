@@ -222,7 +222,7 @@ List<Message> messageDummy = [
         id: 1,
         name: "Wardah Seaweed Balancing Facial Wash",
         image:
-            "https://images.tokopedia.net/img/JFrBQq/2022/8/19/6c90f583-d469-4cce-89bc-014fa1ffa60a.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTESYu0gnS-uQctFVEmvcIxiUmEx_xxePwxqg&usqp=CAU",
         isSentByMe: false,
         createdAt: DateTime.parse("2023-10-08 08:58:52.418"),
       )),
@@ -232,7 +232,7 @@ List<Message> messageDummy = [
         id: 2,
         name: "WARDAH UV Shield Sunscreen Gel",
         image:
-            "https://images.tokopedia.net/img/JFrBQq/2022/8/19/6c90f583-d469-4cce-89bc-014fa1ffa60a.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtM0gPPzDWFKBikCDYMBrvmkklja5NzT7OPA&usqp=CAU",
         isSentByMe: false,
         createdAt: DateTime.parse("2023-10-08 08:58:52.418"),
       )),
@@ -242,7 +242,7 @@ List<Message> messageDummy = [
         id: 3,
         name: "Wardah Nature Daily Witch Hazel Purifying Moist ",
         image:
-            "https://images.tokopedia.net/img/JFrBQq/2022/8/19/6c90f583-d469-4cce-89bc-014fa1ffa60a.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY-d3giltUwwz-9hmMX6bXQCjx5ft0p6KWPg&usqp=CAU",
         isSentByMe: false,
         createdAt: DateTime.parse("2023-10-08 08:58:52.418"),
       )),
@@ -252,7 +252,7 @@ List<Message> messageDummy = [
         id: 4,
         name: "Wardah Acnederm Acne Spot Teatment G",
         image:
-            "https://images.tokopedia.net/img/JFrBQq/2022/8/19/6c90f583-d469-4cce-89bc-014fa1ffa60a.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhgNgAcFyV0FMi-0O1vnIIgY7pCub23EqXLQ&usqp=CAU",
         isSentByMe: false,
         createdAt: DateTime.parse("2023-10-08 08:58:52.418"),
       )),

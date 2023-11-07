@@ -1,13 +1,19 @@
+import 'package:bright_me/bloc/product/product_bloc.dart';
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/constants/home_fitur_data.dart';
+import 'package:bright_me/constants/news_const.dart';
+import 'package:bright_me/models/product.dart';
 import 'package:bright_me/models/user.dart';
+import 'package:bright_me/widget/loading_wigdet.dart';
 import 'package:bright_me/widget/news_card.dart';
 import 'package:bright_me/widget/product_card.dart';
+import 'package:bright_me/widget/snackbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +23,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _carrouselIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -87,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () =>
+                              Navigator.pushNamed(context, cartPageRoute),
                           style: ElevatedButton.styleFrom(
                               backgroundColor: whiteColor,
                               fixedSize: const Size(32, 32),
@@ -205,66 +211,53 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  child: CarouselSlider.builder(
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        viewportFraction: 1,
-                        enlargeCenterPage: true,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _carrouselIndex = index;
-                          });
-                        },
-                      ),
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int itemIndex,
-                              int pageViewIndex) =>
-                          GestureDetector(
-                              onTap: () => Navigator.pushNamed(
-                                  context, spesialProductRoute),
-                              child: Image.asset("assets/images/slider.jpg"))),
-                ),
-                DotsIndicator(
-                  dotsCount: 3,
-                  position: _carrouselIndex,
-                  decorator: DotsDecorator(
-                    size: const Size.square(4),
-                    color: greyColor,
-                    activeColor: purpleColor,
-                    activeSize: const Size(47, 4),
-                    activeShape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 23),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Popular products',
-                        style: semiBold(
-                          sizeFont: 16,
-                          colorFont: blackColor,
-                        ),
-                      ),
-                      Text(
-                        'View More',
-                        style: medium(
-                          sizeFont: 12,
-                          colorFont: greyColor,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ProductCard(),
-                    ProductCard(),
-                  ],
+                const CarouselWidget(),
+                BlocConsumer<ProductBloc, ProductState>(
+                  listener: (context, state) {
+                    if (state is AllProductEror) {
+                      showSnackBar(context, "Fail get product");
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state is AllProductLoading) {
+                      return const LoadingWidget();
+                    } else if (state is AllProductSucces) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 30, bottom: 23),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Popular products',
+                                  style: semiBold(
+                                    sizeFont: 16,
+                                    colorFont: blackColor,
+                                  ),
+                                ),
+                                Text(
+                                  'View More',
+                                  style: medium(
+                                    sizeFont: 12,
+                                    colorFont: greyColor,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ProductCard(product: populerProduct[0]),
+                              ProductCard(product: populerProduct[1]),
+                            ],
+                          ),
+                        ],
+                      );
+                    }
+                    return Container();
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30, bottom: 16),
@@ -315,10 +308,14 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             )),
-                        const NewsCard(
+                        NewsCard(
+                          title: newsConst[0]["title"]!,
+                          image: newsConst[0]["image"]!,
                           space: 3,
                         ),
-                        const NewsCard(
+                        NewsCard(
+                          title: newsConst[1]["title"]!,
+                          image: newsConst[1]["image"]!,
                           space: 3,
                         ),
                       ],
@@ -333,6 +330,56 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CarouselWidget extends StatefulWidget {
+  const CarouselWidget({super.key});
+
+  @override
+  State<CarouselWidget> createState() => _CarouselWidgetState();
+}
+
+class _CarouselWidgetState extends State<CarouselWidget> {
+  int _carrouselIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          child: CarouselSlider.builder(
+              options: CarouselOptions(
+                autoPlay: true,
+                viewportFraction: 1,
+                enlargeCenterPage: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _carrouselIndex = index;
+                  });
+                },
+              ),
+              itemCount: 3,
+              itemBuilder:
+                  (BuildContext context, int itemIndex, int pageViewIndex) =>
+                      GestureDetector(
+                          onTap: () =>
+                              Navigator.pushNamed(context, spesialProductRoute),
+                          child: Image.asset("assets/images/slider.jpg"))),
+        ),
+        DotsIndicator(
+          dotsCount: 3,
+          position: _carrouselIndex,
+          decorator: DotsDecorator(
+            size: const Size.square(4),
+            color: greyColor,
+            activeColor: purpleColor,
+            activeSize: const Size(47, 4),
+            activeShape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          ),
+        ),
+      ],
     );
   }
 }

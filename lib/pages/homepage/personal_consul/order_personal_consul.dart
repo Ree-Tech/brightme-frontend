@@ -43,8 +43,10 @@ class _OrderPersonalConsulPageState extends State<OrderPersonalConsulPage>
       backgroundColor: purpleColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const CustomAppBar(
+          CustomAppBar(
             titleAppBar: "Personal Consul",
+            onPressedFunc: () => Navigator.pushNamedAndRemoveUntil(
+                context, appRoute, (route) => false),
           ),
         ],
         body: Column(

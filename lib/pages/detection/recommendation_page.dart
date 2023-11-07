@@ -1,4 +1,5 @@
 import 'package:bright_me/config/color_theme.dart';
+import 'package:bright_me/models/product.dart';
 import 'package:bright_me/widget/custom_appbar.dart';
 import 'package:bright_me/widget/product_card.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class RecommendationPage extends StatelessWidget {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppBar(
-            titleAppBar: "Process Result",
+            titleAppBar: "Recommendation",
             onPressedFunc: () => Navigator.pop(context),
           )
         ],
@@ -38,7 +39,7 @@ class RecommendationPage extends StatelessWidget {
               itemCount: 8,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return const ProductCard();
+                return ProductCard(product: dummyProduct);
               },
             ),
           ),

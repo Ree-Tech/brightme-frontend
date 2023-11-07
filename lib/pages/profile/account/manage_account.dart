@@ -47,8 +47,8 @@ class ManageAccount extends StatelessWidget {
                       builder: (context) => BlocListener<AuthBloc, AuthState>(
                             listener: (context, state) {
                               if (state is Unauthenticated) {
-                                Navigator.pushReplacementNamed(
-                                    context, loginRoute);
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, loginRoute, (route) => false);
                               }
                             },
                             child: ConfirmPopUp(

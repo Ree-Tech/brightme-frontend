@@ -43,7 +43,11 @@ class _OrderPageState extends State<OrderPage>
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           CustomAppBar(
             titleAppBar: "My Order",
-            onPressedFunc: () => Navigator.pop(context),
+            onPressedFunc: () => Navigator.pushNamedAndRemoveUntil(
+              context,
+              appRoute,
+              (route) => false,
+            ),
           ),
         ],
         body: Column(
