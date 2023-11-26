@@ -10,6 +10,16 @@ class PersonalConsulPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, orderPersonalConsulroute),
+        shape: const CircleBorder(),
+        backgroundColor: whiteColor,
+        child: Image.asset(
+          "assets/images/icon_clipboard.jpg",
+          width: 24,
+          height: 24,
+        ),
+      ),
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
