@@ -125,7 +125,9 @@ class RouteGenarator {
         return MaterialPageRoute(builder: (_) => const ConsulPaymentComplete());
       case orderPersonalConsulroute:
         return MaterialPageRoute(
-            builder: (_) => const OrderPersonalConsulPage());
+            builder: (_) => OrderPersonalConsulPage(
+                  index: settings.arguments as int?,
+                ));
       case rateDoctorRoute:
         return MaterialPageRoute(builder: (_) => const RateDoctorPage());
       case chatConsulRoute:
@@ -165,7 +167,10 @@ class RouteGenarator {
       case shopPaymentCompleteRoute:
         return MaterialPageRoute(builder: (_) => const ShopPaymentComplete());
       case orderProductRoute:
-        return MaterialPageRoute(builder: (_) => const OrderPage());
+        return MaterialPageRoute(
+            builder: (_) => OrderPage(
+                  index: settings.arguments as int?,
+                ));
       case productDetailRoute:
         return MaterialPageRoute(
             builder: (_) => DetailProductPage(

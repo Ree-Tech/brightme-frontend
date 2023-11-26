@@ -1,13 +1,18 @@
+import 'package:flutter/material.dart';
+
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/pages/homepage/personal_consul/modal_detail_consul.dart';
 import 'package:bright_me/widget/custom_appbar.dart';
 import 'package:bright_me/widget/modal_widget.dart';
-import 'package:flutter/material.dart';
 
 class OrderPersonalConsulPage extends StatefulWidget {
-  const OrderPersonalConsulPage({super.key});
+  final int? index;
+  const OrderPersonalConsulPage({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   State<OrderPersonalConsulPage> createState() =>
@@ -17,11 +22,17 @@ class OrderPersonalConsulPage extends StatefulWidget {
 class _OrderPersonalConsulPageState extends State<OrderPersonalConsulPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late int? curentIndex;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    curentIndex = widget.index ?? 0;
+    _tabController = TabController(
+      initialIndex: curentIndex!,
+      length: 3,
+      vsync: this,
+    );
     _tabController.addListener(_handleTabChange);
   }
 

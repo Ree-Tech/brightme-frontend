@@ -1,5 +1,6 @@
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
+import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/constants/acitivty_data.dart';
 import 'package:bright_me/widget/custom_appbar.dart';
 import 'package:flutter/material.dart';
@@ -50,19 +51,26 @@ class _ActivityPageState extends State<ActivityPage> {
 
                         return Column(
                           children: [
-                            ListTile(
-                              leading: item['Icon'],
-                              title: Text(
-                                item['title'],
-                                style: reguler(
-                                  sizeFont: 14,
-                                  colorFont: darGreykColor,
-                                ),
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                context,
+                                orderProductRoute,
+                                arguments: entry.key,
                               ),
-                              trailing: const Icon(
-                                Icons.arrow_forward_ios_outlined,
-                                color: darGreykColor,
-                                size: 16,
+                              child: ListTile(
+                                leading: item['Icon'],
+                                title: Text(
+                                  item['title'],
+                                  style: reguler(
+                                    sizeFont: 14,
+                                    colorFont: darGreykColor,
+                                  ),
+                                ),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: darGreykColor,
+                                  size: 16,
+                                ),
                               ),
                             ),
                             if (!isLastItem)
@@ -100,19 +108,26 @@ class _ActivityPageState extends State<ActivityPage> {
 
                           return Column(
                             children: [
-                              ListTile(
-                                leading: item['Icon'],
-                                title: Text(
-                                  item['title'],
-                                  style: reguler(
-                                    sizeFont: 14,
-                                    colorFont: darGreykColor,
-                                  ),
+                              GestureDetector(
+                                onTap: () => Navigator.pushNamed(
+                                  context,
+                                  orderPersonalConsulroute,
+                                  arguments: entry.key,
                                 ),
-                                trailing: const Icon(
-                                  Icons.arrow_forward_ios_outlined,
-                                  color: darGreykColor,
-                                  size: 16,
+                                child: ListTile(
+                                  leading: item['Icon'],
+                                  title: Text(
+                                    item['title'],
+                                    style: reguler(
+                                      sizeFont: 14,
+                                      colorFont: darGreykColor,
+                                    ),
+                                  ),
+                                  trailing: const Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: darGreykColor,
+                                    size: 16,
+                                  ),
                                 ),
                               ),
                               if (!isLastItem)

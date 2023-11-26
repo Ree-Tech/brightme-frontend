@@ -1,12 +1,17 @@
+import 'package:flutter/material.dart';
+
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/config/route_name.dart';
 import 'package:bright_me/widget/card_order.dart';
 import 'package:bright_me/widget/custom_appbar.dart';
-import 'package:flutter/material.dart';
 
 class OrderPage extends StatefulWidget {
-  const OrderPage({super.key});
+  final int? index;
+  const OrderPage({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   State<OrderPage> createState() => _OrderPageState();
@@ -15,11 +20,14 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late int curentIndex;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    curentIndex = widget.index ?? 0;
+    _tabController =
+        TabController(initialIndex: curentIndex, length: 3, vsync: this);
     _tabController.addListener(_handleTabChange);
   }
 
