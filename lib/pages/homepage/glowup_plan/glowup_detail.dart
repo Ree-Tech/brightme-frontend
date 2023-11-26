@@ -238,7 +238,8 @@ class GlowUpPlanDetailPage extends StatelessWidget {
                     height: 30,
                   ),
                   CustomButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        Navigator.pushNamed(context, personalConsulRoute),
                     childWidget: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
