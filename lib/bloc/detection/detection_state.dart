@@ -21,3 +21,16 @@ final class PostDetectionEror extends DetectionState {
   @override
   List<Object> get props => [text];
 }
+
+final class SaveImageLoading extends DetectionState {}
+
+final class SaveImageSuccess extends DetectionState {}
+
+final class SaveImageEror extends DetectionState {
+  final String text;
+
+  const SaveImageEror(this.text);
+
+  @override
+  List<Object> get props => [text];
+}

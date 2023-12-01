@@ -28,13 +28,6 @@ class _AppPagesState extends State<AppPages> {
     ProfilePage(),
   ];
 
-  // @override
-  // void initState() {
-  //   context.read<ProductBloc>().add(FetchListAllProduct());
-  //   context.read<ProductBloc>().add(FetchListCategoryProduct());
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

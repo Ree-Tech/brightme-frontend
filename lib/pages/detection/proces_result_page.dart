@@ -33,7 +33,11 @@ class _ProcessResultPageState extends State<ProcessResultPage> {
     super.initState();
   }
 
-  Future _dialogPop() async {
+  Future _dialogPop(
+    String title,
+    String buttonText,
+    void Function() onTap,
+  ) async {
     showDialog(
         context: context,
         builder: (context) {
@@ -42,7 +46,7 @@ class _ProcessResultPageState extends State<ProcessResultPage> {
               borderRadius: BorderRadius.circular(24.0),
             ),
             title: Text(
-              "Do you want to track your face progress?",
+              title,
               style: medium(colorFont: blackColor, sizeFont: 14),
               textAlign: TextAlign.center,
             ),
@@ -51,14 +55,8 @@ class _ProcessResultPageState extends State<ProcessResultPage> {
                 child: SizedBox(
                     width: 210,
                     child: CustomButton(
-                      buttonText: "Save Now!",
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          appRoute,
-                          (route) => false,
-                        );
-                      },
+                      buttonText: buttonText,
+                      onPressed: onTap,
                     )),
               ),
             ],
@@ -75,7 +73,13 @@ class _ProcessResultPageState extends State<ProcessResultPage> {
           CustomAppBar(
               titleAppBar: "Process Result",
               onPressedFunc: () async {
-                await _dialogPop();
+                await _dialogPop(
+                    "Do you want to track your face progress?", "Save Now!",
+                    () {
+                  context
+                      .read<DetectionBloc>()
+                      .add(SaveImageEvent(widget.imagePath));
+                });
               })
         ],
         body: BlocConsumer<DetectionBloc, DetectionState>(
@@ -87,10 +91,22 @@ class _ProcessResultPageState extends State<ProcessResultPage> {
                 purpleColor,
                 whiteColor,
               );
+            } else if (state is SaveImageEror) {
+              showSnackBar(
+                context,
+                state.text,
+                purpleColor,
+                whiteColor,
+              );
+            } else if (state is SaveImageSuccess) {
+              _dialogPop("Save Success", "Back To Homepage", () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, appRoute, (route) => false);
+              });
             }
           },
           builder: (context, state) {
-            if (state is PostDetectionLoading) {
+            if (state is PostDetectionLoading || state is SaveImageLoading) {
               return const LoadingWidget(
                 color: whiteColor,
               );

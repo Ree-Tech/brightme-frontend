@@ -15,3 +15,12 @@ final class PostPhotoDetectionEvent extends DetectionEvent {
   @override
   List<Object> get props => [imagePath];
 }
+
+final class SaveImageEvent extends DetectionEvent {
+  final String imagePath;
+
+  const SaveImageEvent(this.imagePath);
+
+  @override
+  List<Object> get props => [imagePath];
+}
