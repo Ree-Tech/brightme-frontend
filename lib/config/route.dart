@@ -1,5 +1,4 @@
 import 'package:bright_me/config/route_name.dart';
-import 'package:bright_me/models/product.dart';
 import 'package:bright_me/pages/app_page.dart';
 import 'package:bright_me/pages/auth/forgot_password/forgot_password_page.dart';
 import 'package:bright_me/pages/auth/forgot_password/submit_email_page.dart';
@@ -42,8 +41,7 @@ import 'package:bright_me/pages/profile/account/switch_account.dart';
 import 'package:bright_me/pages/profile/support/faq_page.dart';
 import 'package:bright_me/pages/profile/support/help_center_page.dart';
 import 'package:bright_me/pages/shop/cart_page.dart';
-import 'package:bright_me/pages/shop/detail_product.dart';
-import 'package:bright_me/pages/shop/liked_product_page.dart';
+import 'package:bright_me/pages/shop/like_product/liked_product_page.dart';
 import 'package:bright_me/pages/shop/new_arrivals_page.dart';
 import 'package:bright_me/pages/shop/order_confirm_page.dart';
 import 'package:bright_me/pages/shop/order_page.dart';
@@ -70,7 +68,10 @@ class RouteGenarator {
                   email: settings.arguments as String,
                 ));
       case appRoute:
-        return MaterialPageRoute(builder: (_) => const AppPages());
+        return MaterialPageRoute(
+            builder: (_) => AppPages(
+                  index: settings.arguments as int?,
+                ));
       case cameraPageRoute:
         return MaterialPageRoute(builder: (_) => const CameraPage());
       case processResultRoute:
@@ -171,11 +172,7 @@ class RouteGenarator {
             builder: (_) => OrderPage(
                   index: settings.arguments as int?,
                 ));
-      case productDetailRoute:
-        return MaterialPageRoute(
-            builder: (_) => DetailProductPage(
-                  product: settings.arguments as Product,
-                ));
+
       case glowupEduDetail:
         return MaterialPageRoute(builder: (_) => const GlowUpEduDetail());
 

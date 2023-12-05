@@ -1,22 +1,25 @@
-import 'package:bright_me/bloc/cart/cart_bloc.dart';
-import 'package:bright_me/widget/snackbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:bright_me/bloc/cart/cart_bloc.dart';
+import 'package:bright_me/bloc/like/like_bloc.dart';
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
 import 'package:bright_me/constants/product_const.dart';
 import 'package:bright_me/models/product.dart';
 import 'package:bright_me/widget/custom_button.dart';
 import 'package:bright_me/widget/review_card.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bright_me/widget/snackbar.dart';
 
 class DetailProductPage extends StatefulWidget {
   final Product product;
+  final Function(bool) onLikeStatusChanged;
   const DetailProductPage({
     Key? key,
     required this.product,
+    required this.onLikeStatusChanged,
   }) : super(key: key);
 
   @override
@@ -26,7 +29,7 @@ class DetailProductPage extends StatefulWidget {
 class _DetailProductPageState extends State<DetailProductPage>
     with SingleTickerProviderStateMixin {
   int _carrouselIndex = 0;
-  bool isfavorite = false;
+  late bool isfavorite;
   late TabController _tabController;
   int _selectedVariant = 0;
 
@@ -35,6 +38,7 @@ class _DetailProductPageState extends State<DetailProductPage>
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabChange);
+    isfavorite = widget.product.isLike;
   }
 
   @override
@@ -144,8 +148,26 @@ class _DetailProductPageState extends State<DetailProductPage>
                             ),
                             ElevatedButton(
                                 onPressed: () {
+                                  if (isfavorite) {
+                                    context
+                                        .read<LikeBloc>()
+                                        .add(DeleteLikeProductByIdEvent(
+                                          widget.product.idLike!,
+                                          widget.product,
+                                        ));
+                                  } else {
+                                    context
+                                        .read<LikeBloc>()
+                                        .add(AddLikedProductEvent(
+                                          widget.product,
+                                          widget
+                                              .product.productVariations[0].id,
+                                        ));
+                                  }
                                   setState(() {
                                     isfavorite = !isfavorite;
+                                    widget.product.isLike = isfavorite;
+                                    widget.onLikeStatusChanged(isfavorite);
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(

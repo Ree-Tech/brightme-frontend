@@ -15,6 +15,8 @@ class Product {
   List<ProductVariation> productVariations;
   List<dynamic>? productReviews;
   List<ProductImage> productImages;
+  bool isLike;
+  int? idLike;
 
   Product({
     required this.id,
@@ -29,10 +31,12 @@ class Product {
     required this.productCategoryId,
     required this.createdAt,
     required this.updatedAt,
-    required this.productCategory,
     required this.productVariations,
+    required this.productCategory,
     required this.productReviews,
     required this.productImages,
+    required this.isLike,
+    required this.idLike,
   });
 
   String discountPrice(int index) {
@@ -59,6 +63,8 @@ class Product {
         usage: json["usage"],
         recommendations: json["recommendations"],
         discount: json["discount"],
+        isLike: false,
+        idLike: null,
         productCategoryId: json["product_category_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -200,56 +206,4 @@ List<Product> spescialOffer = [];
 List<Product> populerProduct = [];
 List<Product> arrivalProduct = [];
 List<Product> allProduct = [];
-
-Product dummyProduct = Product.fromJson({
-  "id": 4,
-  "name": "Hydration Serum",
-  "brand": "Make Over",
-  "slug": "hydration-serum",
-  "description":
-      "A multi-functional gel containing natural Aloe vera that provides extra moisture with a soothing effect and cools dry and reddened skin from the sun. Its unique, light, and non-sticky formula works as an anti-irritant, anti-inflammatory, as a soothing agent for sunburned skin, and helps increase skin resistance (skin barrier)",
-  "summary": "face serum",
-  "usage":
-      "Moisturizer Apply evenly on the skin that is dry, itchy or red. Can be applied on the face, body, feet, hands and hair. • Mask Apply, wait until it dries and then rinse with water. Helps hydration and relieves irritation redness and refreshes facial skin after sunbathing, outdoor activities",
-  "recommendations": "dry,acne",
-  "discount": "0",
-  "product_category_id": "2",
-  "created_at": "2023-11-06 17:21:10",
-  "updated_at": "2023-11-06 17:21:10",
-  "product_category": {
-    "id": 2,
-    "name": "Popular Products",
-    "slug": "popular-products",
-    "created_at": "2023-11-06 12:27:44",
-    "updated_at": "2023-11-06 12:27:44"
-  },
-  "product_variations": [
-    {
-      "id": 5,
-      "name": "200ml",
-      "price": "50000",
-      "product_id": "4",
-      "created_at": "2023-11-06 17:22:06",
-      "updated_at": "2023-11-06 17:22:06"
-    }
-  ],
-  "product_reviews": [],
-  "product_images": [
-    {
-      "id": 1,
-      "img":
-          "https://brightmeapi.reetech.site/public/storage/products/serum-1699266070.png",
-      "product_id": "4",
-      "created_at": "2023-11-06 17:21:10",
-      "updated_at": "2023-11-06 17:21:10"
-    },
-    {
-      "id": 2,
-      "img":
-          "https://brightmeapi.reetech.site/public/storage/products/serum-1699266070.png",
-      "product_id": "4",
-      "created_at": "2023-11-06 17:21:10",
-      "updated_at": "2023-11-06 17:21:10"
-    }
-  ]
-});
+List<Product> listUserLike = [];

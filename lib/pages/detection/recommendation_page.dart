@@ -39,7 +39,7 @@ class RecommendationPage extends StatelessWidget {
               itemCount: 8,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return ProductCard(product: dummyProduct);
+                return ProductCard(product: populerProduct[index]);
               },
             ),
           ),

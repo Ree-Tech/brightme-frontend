@@ -1,3 +1,7 @@
+import 'package:bright_me/bloc/product/product_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:bright_me/bloc/user/user_bloc.dart';
 import 'package:bright_me/config/color_theme.dart';
 import 'package:bright_me/config/font_theme.dart';
@@ -7,18 +11,27 @@ import 'package:bright_me/pages/homepage/home_page.dart';
 import 'package:bright_me/pages/profile/profile_page.dart';
 import 'package:bright_me/pages/shop/shop_page.dart';
 import 'package:bright_me/widget/loading_wigdet.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppPages extends StatefulWidget {
-  const AppPages({super.key});
+  final int? index;
+  const AppPages({
+    Key? key,
+    this.index,
+  }) : super(key: key);
 
   @override
   State<AppPages> createState() => _AppPagesState();
 }
 
 class _AppPagesState extends State<AppPages> {
-  int _currentIndex = 0;
+  late int _currentIndex;
+  @override
+  void initState() {
+    int page = widget.index ?? 0;
+    _currentIndex = page;
+    context.read<ProductBloc>().add(FetchListAllProduct());
+    super.initState();
+  }
 
   final List<Widget> _pages = const [
     HomePage(),

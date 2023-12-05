@@ -1,6 +1,7 @@
 import 'package:bright_me/bloc/auth/auth_bloc.dart';
 import 'package:bright_me/bloc/cart/cart_bloc.dart';
 import 'package:bright_me/bloc/detection/detection_bloc.dart';
+import 'package:bright_me/bloc/like/like_bloc.dart';
 
 import 'package:bright_me/bloc/product/product_bloc.dart';
 import 'package:bright_me/bloc/user/user_bloc.dart';
@@ -41,10 +42,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => AuthBloc()..add(HasLoginEvent())),
         BlocProvider(create: (context) => UserBloc()..add(FetchUserEvent())),
-        BlocProvider(
-            create: (context) => ProductBloc()..add(FetchListAllProduct())),
+        BlocProvider(create: (context) => ProductBloc()),
         BlocProvider(create: (context) => DetectionBloc()),
         BlocProvider(create: (context) => CartBloc()),
+        BlocProvider(create: (context) => LikeBloc())
       ],
       child: MaterialApp(
           theme: ThemeData(
